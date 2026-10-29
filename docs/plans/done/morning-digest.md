@@ -1,8 +1,17 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
+completed: 2026-10-29
+issues:
+  - https://github.com/funnydonut/mega-s01e04-before-i-looked/issues/1
+  - https://github.com/funnydonut/mega-s01e04-before-i-looked/issues/2
+  - https://github.com/funnydonut/mega-s01e04-before-i-looked/issues/3
+  - https://github.com/funnydonut/mega-s01e04-before-i-looked/issues/4
+  - https://github.com/funnydonut/mega-s01e04-before-i-looked/issues/5
+  - https://github.com/funnydonut/mega-s01e04-before-i-looked/issues/6
+  - https://github.com/funnydonut/mega-s01e04-before-i-looked/issues/7
 ---
 
 # Morning digest
@@ -77,3 +86,5 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+Completed: 2026-10-29. The preview was reviewed and its public marker was removed.

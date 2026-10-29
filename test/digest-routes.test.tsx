@@ -44,8 +44,8 @@ describe('digest routes', () => {
     const body = html.match(/<tbody>([\s\S]*?)<\/tbody>/)?.[1] ?? '';
     const htmlJobs = [...body.matchAll(/<tr>\s*<td>(.*?)<\/td>/g)].map((match) => match[1].replaceAll('&lt;', '<').replaceAll('&gt;', '>'));
     expect(digest.rows.map((row: { job: string }) => row.job)).toEqual(['<img src=x>', 'failed', 'zeta']);
-    expect(htmlJobs).toEqual(['&lt;img src=x&gt;', 'failed', 'zeta']);
-    expect(digest.rows.map((row: { job: string }) => row.job)).toEqual(htmlJobs.map((job) => job.replaceAll('&lt;', '<').replaceAll('&gt;', '>')));
+    expect(htmlJobs).toEqual(['<img src=x>', 'failed', 'zeta']);
+    expect(digest.rows.map((row: { job: string }) => row.job)).toEqual(htmlJobs);
     expect(html).toContain('&lt;img src=x&gt;');
     expect(html).toContain('&lt;script&gt;alert(1)&lt;/script&gt;');
     expect(html).not.toContain('<script>');

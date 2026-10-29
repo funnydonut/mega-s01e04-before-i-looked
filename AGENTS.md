@@ -30,6 +30,20 @@ Read first: `docs/vision.md`, `docs/styleguide.md`. Decisions: `docs/adr/`.
 5. An issue is closed only when its "Done when" holds. If it can't hold yet, leave it open and
    say what it waits on.
 
+## Human-approved issue contract
+
+For `morning-digest`, the human approved seven issues with this shape:
+
+- First line: `Source: plan.md § <n>`; label: `plan:morning-digest`.
+- Sections: `Scope`, `Done when` (checklist), `Blocked by` (real issue links), `Test / evidence`.
+- Keep the three-line completion record above. Never attach previews, markers, env or private logs.
+- The preview issue stays open until the reviewer explicitly confirms looking at the page.
+  A submission receipt does not satisfy that condition. Cleanup waits for that confirmation
+  and separate human approval; see ADR 0003.
+
+The existing `plan-to-issues` skill reads this file. Ask the human before changing the
+contract for a new plan.
+
 ## Skills
 
 Shared skills live in `.agents/skills/`, one folder each, `SKILL.md` inside. That folder is the

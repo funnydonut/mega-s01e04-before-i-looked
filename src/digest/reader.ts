@@ -56,11 +56,12 @@ export const readNight: ReadNight = (runsDir, night) => {
     digest.counts[event.status]++;
     let row = rows.get(event.job);
     if (!row) {
-      row = { job: event.job, owner: event.owner, runs: 0, retries: 0, lastStatus: event.status, lastError: null, firstAt: event.at, lastAt: event.at };
+      row = { job: event.job, owner: event.owner, runs: 0, retries: 0, failures: 0, lastStatus: event.status, lastError: null, firstAt: event.at, lastAt: event.at };
       rows.set(event.job, row);
     }
     row.runs++;
     if (event.status === 'retry') row.retries++;
+    if (event.status === 'fail') row.failures++;
     row.owner = event.owner;
     row.lastStatus = event.status;
     row.lastAt = event.at;

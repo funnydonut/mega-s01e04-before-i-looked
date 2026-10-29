@@ -12,18 +12,19 @@ export function DigestPage({ digest }: { digest: NightDigest }) {
         <table>
           <thead>
             <tr>
-              <th>job</th><th>owner</th><th>runs</th><th>retries</th><th>last status</th><th>last error</th><th>first time</th><th>last time</th>
+              <th>job</th><th>owner</th><th>runs</th><th>retries</th><th>failures</th><th>last status</th><th>last error</th><th>first time</th><th>last time</th>
             </tr>
           </thead>
           <tbody>
             {digest.rows.map((row) => {
-              const warn = row.retries >= 3 || row.lastStatus === 'fail';
+              const warn = row.retries >= 3 || row.failures > 0;
               return (
                 <tr>
                   <td>{row.job}</td>
                   <td>{row.owner ?? '—'}</td>
                   <td>{row.runs}</td>
                   <td class={row.retries >= 3 ? 'warn' : undefined}>{row.retries}</td>
+                  <td class={row.failures > 0 ? 'warn' : undefined}>{row.failures}</td>
                   <td class={warn ? 'warn' : undefined}>{row.lastStatus}</td>
                   <td>{row.lastError ?? '—'}</td>
                   <td>{row.firstAt}</td>

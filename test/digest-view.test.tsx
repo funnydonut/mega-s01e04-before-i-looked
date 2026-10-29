@@ -10,9 +10,9 @@ describe('digest page', () => {
       badLines: 2,
       counts: { ok: 0, retry: 0, fail: 0 },
       rows: [
-        { job: 'alpha', owner: null, runs: 4, retries: 3, lastStatus: 'retry', lastError: null, firstAt: '2026-10-28T08:00:00+02:00', lastAt: '2026-10-28T08:03:00+02:00' },
-        { job: 'beta', owner: 'Sam', runs: 1, retries: 0, lastStatus: 'fail', lastError: 'broken', firstAt: '2026-10-28T08:04:00+02:00', lastAt: '2026-10-28T08:04:00+02:00' },
-        { job: 'gamma', owner: 'Rae', runs: 3, retries: 2, lastStatus: 'ok', lastError: null, firstAt: '2026-10-28T06:00:00Z', lastAt: '2026-10-28T06:02:00Z' },
+        { job: 'alpha', owner: null, runs: 4, retries: 3, failures: 0, lastStatus: 'retry', lastError: null, firstAt: '2026-10-28T08:00:00+02:00', lastAt: '2026-10-28T08:03:00+02:00' },
+        { job: 'beta', owner: 'Sam', runs: 1, retries: 0, failures: 1, lastStatus: 'fail', lastError: 'broken', firstAt: '2026-10-28T08:04:00+02:00', lastAt: '2026-10-28T08:04:00+02:00' },
+        { job: 'gamma', owner: 'Rae', runs: 3, retries: 2, failures: 0, lastStatus: 'ok', lastError: null, firstAt: '2026-10-28T06:00:00Z', lastAt: '2026-10-28T06:02:00Z' },
       ],
     };
     const html = renderToString(<DigestPage digest={digest} />);
@@ -29,7 +29,7 @@ describe('digest page', () => {
   it('escapes external strings rendered in the table', () => {
     const digest: NightDigest = {
       night: '2026-10-28', badLines: 0, counts: { ok: 0, retry: 0, fail: 0 },
-      rows: [{ job: '<img src=x>', owner: '<script>alert(1)</script>', runs: 1, retries: 0, lastStatus: 'ok', lastError: '<b>oops</b>', firstAt: '2026-10-28T08:00:00Z', lastAt: '2026-10-28T08:00:00Z' }],
+      rows: [{ job: '<img src=x>', owner: '<script>alert(1)</script>', runs: 1, retries: 0, failures: 0, lastStatus: 'ok', lastError: '<b>oops</b>', firstAt: '2026-10-28T08:00:00Z', lastAt: '2026-10-28T08:00:00Z' }],
     };
     const html = renderToString(<DigestPage digest={digest} />);
     expect(html).toContain('&lt;img src=x&gt;');

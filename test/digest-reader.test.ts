@@ -42,7 +42,7 @@ describe('readNight', () => {
       { ...event, at: '2026-10-28T23:00:00Z', status: 'retry', error: 'new error' },
       { ...event, at: '2026-10-28T23:30:00+02:00', status: 'fail', error: 'old error' },
     ]);
-    expect(readNight(dir, '2026-10-28')?.rows).toEqual([{ job: 'a', owner: 'latest', runs: 3, retries: 1, lastStatus: 'ok', lastError: 'new error', firstAt: '2026-10-28T23:30:00+02:00', lastAt: '2026-10-29T00:10:00+01:00' }]);
+    expect(readNight(dir, '2026-10-28')?.rows).toEqual([{ job: 'a', owner: 'latest', runs: 3, retries: 1, failures: 1, lastStatus: 'ok', lastError: 'new error', firstAt: '2026-10-28T23:30:00+02:00', lastAt: '2026-10-29T00:10:00+01:00' }]);
   });
   it('propagates unrelated I/O errors', () => {
     const dir = fixture();

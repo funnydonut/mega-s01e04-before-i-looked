@@ -29,6 +29,7 @@ describe('digest routes', () => {
       { at: '2026-10-28T08:03:00+02:00', job: 'zeta', status: 'retry', owner: 'Ada' },
       { at: '2026-10-28T08:04:00+02:00', job: 'zeta', status: 'retry', owner: 'Ada' },
       { at: '2026-10-28T08:05:00+02:00', job: 'failed', status: 'fail', owner: 'Sam' },
+      { at: '2026-10-28T08:06:00+02:00', job: 'failed', status: 'ok', owner: 'Sam' },
     ];
     const app = appFor(runsDir({ [`${night}.jsonl`]: events.map((event) => JSON.stringify(event)).join('\n') }));
     const [page, api] = await Promise.all([
@@ -52,7 +53,8 @@ describe('digest routes', () => {
     expect(html).toContain('—');
     expect(html).toContain('2026-10-28T08:00:00+02:00');
     expect(html).toContain('class="warn">4</td>');
-    expect(html).toContain('class="warn">fail</td>');
+    expect(digest.rows[1]).toMatchObject({ lastStatus: 'ok', failures: 1 });
+    expect(html).toContain('class="warn">1</td>');
   });
 
   it('returns 404 for missing and invalid nights on both routes', async () => {
